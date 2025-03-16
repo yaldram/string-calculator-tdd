@@ -61,5 +61,17 @@ describe("String calculator TDD", () => {
     it("11. should work with commas and newlines when no custom delimiter", () => {
       expect(add("1,2\n3")).toBe(6);
     });
+
+    it("12. should correctly extract custom delimiter", () => {
+      const result = extractCustomDelimiter("//;\n1;2");
+      expect(result.delimiter.toString()).toBe(/;/.toString());
+      expect(result.numberString).toBe("1;2");
+    });
+    
+    it("13. should return default delimiter when no custom delimiter is specified", () => {
+      const result = extractCustomDelimiter("1,2\n3");
+      expect(result.delimiter.toString()).toBe(/[,\n]/.toString());
+      expect(result.numberString).toBe("1,2\n3");
+    });
   });
 });

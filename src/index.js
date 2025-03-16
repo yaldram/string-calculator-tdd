@@ -6,3 +6,6 @@ export function add(numbers) {
   .map(Number)
   .reduce((sum, num) => sum + num, 0);
 }
+
+// utilities
+export function extractCustomDelimiter(inputString) {}
