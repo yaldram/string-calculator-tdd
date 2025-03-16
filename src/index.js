@@ -27,8 +27,12 @@ export function extractCustomDelimiter(inputString) {
 
   // extract the custom delimiter and the number string
   const delimiterEndIndex = inputString.indexOf("\n");
-  const customDelimiter = inputString.substring(2, delimiterEndIndex);
+  let customDelimiter = inputString.substring(2, delimiterEndIndex);
   const numberString = inputString.substring(delimiterEndIndex + 1);
+
+  if (customDelimiter.startsWith("[") && customDelimiter.endsWith("]")) {
+    customDelimiter = customDelimiter.substring(1, customDelimiter.length - 1);
+  }
 
   // escape special characters like '.' in the custom delimiter
   const escapedDelimiter = customDelimiter.replace(
