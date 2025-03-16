@@ -67,7 +67,7 @@ describe("String calculator TDD", () => {
       expect(result.regex.toString()).toBe(/;/.toString());
       expect(result.numberString).toBe("1;2");
     });
-    
+
     it("13. should return default delimiter when no custom delimiter is specified", () => {
       const result = extractCustomDelimiter("1,2\n3");
       expect(result.regex.toString()).toBe(/[,\n]/.toString());
@@ -77,8 +77,27 @@ describe("String calculator TDD", () => {
 
   describe("Negative Numbers", () => {
     it("14. should throw an error if negative numbers are passed", () => {
-      expect(() => add("1,2,3,-4")).toThrowError("negative numbers not allowed -4");
-      expect(() => add("1,-2,3,-4")).toThrowError("negative numbers not allowed -2,-4");
+      expect(() => add("1,2,3,-4")).toThrowError(
+        "negative numbers not allowed -4"
+      );
+      expect(() => add("1,-2,3,-4")).toThrowError(
+        "negative numbers not allowed -2,-4"
+      );
     });
-  })
+  });
+
+  describe("Numbers Greater Than 1000", () => {
+    it("15. should ignore numbers bigger than 1000", () => {
+      expect(add("2,1001")).toBe(2);
+      expect(add("1000,1001,2")).toBe(1002);
+    });
+
+    it("16. should ignore numbers bigger than 1000 with custom delimiters", () => {
+      expect(add("//;\n2;1001;3")).toBe(5);
+    });
+
+    it("17. should handle both valid and invalid numbers", () => {
+      expect(add("1,2,1001,3,1200,4")).toBe(10);
+    });
+  });
 });
