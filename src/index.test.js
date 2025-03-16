@@ -117,4 +117,15 @@ describe("String calculator TDD", () => {
       expect(add("//[+++]\n1+++2+++1001+++3")).toBe(6);
     });
   });
+
+  describe("Allow multiple delimiters", () => {
+    it("21. should support multiple delimiters", () => {
+      expect(add("//[*][%]\n1*2%3")).toBe(6);
+      expect(add("//[*][%][#]\n1*2%3#4")).toBe(10);
+    });
+
+    it("22. should support multiple delimiters of any lengths", () => {
+      expect(add("//[***][%%]\n1***2%%3")).toBe(6);
+    });
+  });
 });
