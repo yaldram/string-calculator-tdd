@@ -47,4 +47,19 @@ describe("String calculator TDD", () => {
       expect(add("10,15\n10\n5")).toBe(40);
     });
   });
+
+  describe("Custom Delimiters", () => {
+    it("9. should return the sum of numbers with custom delimiters", () => {
+      expect(add("//;\n4;3")).toBe(7);
+      expect(add("//.\n4.3.2")).toBe(9);
+    });
+
+    it("10. should work with empty string with custom delimiter", () => {
+      expect(add("//;\n")).toBe(0);
+    });
+
+    it("11. should work with commas and newlines when no custom delimiter", () => {
+      expect(add("1,2\n3")).toBe(6);
+    });
+  });
 });
