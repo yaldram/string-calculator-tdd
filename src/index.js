@@ -13,7 +13,7 @@ export function add(numbers) {
     );
   }
 
-  return numbersList.reduce((sum, num) => sum + num, 0);
+  return numbersList.reduce((sum, num) => (num > 1000 ? sum : sum + num), 0);
 }
 
 // utilities
