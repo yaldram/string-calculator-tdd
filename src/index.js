@@ -27,19 +27,26 @@ export function extractCustomDelimiter(inputString) {
 
   // extract the custom delimiter and the number string
   const delimiterEndIndex = inputString.indexOf("\n");
-  let customDelimiter = inputString.substring(2, delimiterEndIndex);
+  const delimiterString = inputString.substring(2, delimiterEndIndex);
   const numberString = inputString.substring(delimiterEndIndex + 1);
 
-  if (customDelimiter.startsWith("[") && customDelimiter.endsWith("]")) {
-    customDelimiter = customDelimiter.substring(1, customDelimiter.length - 1);
+  let delimiters = [];
+
+  const multipleDelimiters = delimiterString.match(/\[([^\]]+)\]/g);
+
+  if (multipleDelimiters) {
+    // slice the brackets
+    delimiters = multipleDelimiters.map((d) => d.slice(1, -1));
+  } else {
+    // single delimiter
+    delimiters = [delimiterString];
   }
 
   // escape special characters like '.' in the custom delimiter
-  const escapedDelimiter = customDelimiter.replace(
-    /[.*+?^${}()|[\]\\]/g,
-    "\\$&"
+  const escapedDelimiters = delimiters.map((d) =>
+    d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
   );
-  const delimiterRegex = new RegExp(escapedDelimiter);
+  const delimiterRegex = new RegExp(escapedDelimiters.join("|"));
 
   return { regex: delimiterRegex, numberString };
 }
