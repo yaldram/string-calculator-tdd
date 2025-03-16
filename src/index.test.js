@@ -40,4 +40,11 @@ describe("String calculator TDD", () => {
       expect(add("10\n15\n10\n5")).toBe(40);
     });
   });
+
+  describe("Mixed Seprators", () => {
+    it("8. should return the sum of numbers separated by comma and newline", () => {
+      expect(add("3,4\n5")).toBe(12);
+      expect(add("10,15\n10\n5")).toBe(40);
+    });
+  });
 });
