@@ -1,6 +1,6 @@
 import { describe, expect } from "vitest";
 
-import { add } from "./index";
+import { add, extractCustomDelimiter } from "./index";
 
 describe("String calculator TDD", () => {
   describe("Basic Functionality", () => {
@@ -64,13 +64,13 @@ describe("String calculator TDD", () => {
 
     it("12. should correctly extract custom delimiter", () => {
       const result = extractCustomDelimiter("//;\n1;2");
-      expect(result.delimiter.toString()).toBe(/;/.toString());
+      expect(result.regex.toString()).toBe(/;/.toString());
       expect(result.numberString).toBe("1;2");
     });
     
     it("13. should return default delimiter when no custom delimiter is specified", () => {
       const result = extractCustomDelimiter("1,2\n3");
-      expect(result.delimiter.toString()).toBe(/[,\n]/.toString());
+      expect(result.regex.toString()).toBe(/[,\n]/.toString());
       expect(result.numberString).toBe("1,2\n3");
     });
   });
