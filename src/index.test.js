@@ -33,4 +33,11 @@ describe("String calculator TDD", () => {
       expect(add("0,0,0")).toBe(0);
     });
   });
+
+  describe("Newline Separator", () => {
+    it("7. should return the sum of numbers separated by newline", () => {
+      expect(add("3\n4")).toBe(7);
+      expect(add("10\n15\n10\n5")).toBe(40);
+    });
+  });
 });
