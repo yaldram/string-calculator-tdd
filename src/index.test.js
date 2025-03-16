@@ -77,7 +77,7 @@ describe("String calculator TDD", () => {
 
   describe("Negative Numbers", () => {
     it("14. should throw an error if negative numbers are passed", () => {
-      expect(() => add("1,2,3,-4")).toThrowError("negatives not allowed -2");
+      expect(() => add("1,2,3,-4")).toThrowError("negative numbers not allowed -4");
       expect(() => add("1,-2,3,-4")).toThrowError("negative numbers not allowed -2,-4");
     });
   })

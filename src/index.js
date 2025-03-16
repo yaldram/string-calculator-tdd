@@ -3,10 +3,17 @@ export function add(numbers) {
 
   const { regex, numberString } = extractCustomDelimiter(numbers);
 
-  return numberString
-    .split(regex)
-    .map(Number)
-    .reduce((sum, num) => sum + num, 0);
+  const numbersList = numberString.split(regex).map(Number);
+
+  const negativeNumbersList = numbersList.filter((num) => num < 0);
+
+  if (negativeNumbersList.length > 0) {
+    throw new Error(
+      `negative numbers not allowed ${negativeNumbersList.join(",")}`
+    );
+  }
+
+  return numbersList.reduce((sum, num) => sum + num, 0);
 }
 
 // utilities
