@@ -100,4 +100,21 @@ describe("String calculator TDD", () => {
       expect(add("1,2,1001,3,1200,4")).toBe(10);
     });
   });
+
+  describe("Delimiters of Any Length", () => {
+    it("18. should extract multiple delimiters enclosed in square brackets", () => {
+      const result = extractCustomDelimiter("//[***]\n1***2***3");
+      expect(result.regex.toString()).toBe(/\*\*\*/.toString());
+      expect(result.numberString).toBe("1***2***3");
+    });
+
+    it("19. should handle delimiters of any length", () => {
+      expect(add("//[***]\n1***2***3")).toBe(6);
+      expect(add("//[****]\n1****2****3****4")).toBe(10);
+    });
+
+    it("20. should filter out numbers larger than 1000 with multiple delimiters", () => {
+      expect(add("//[+++]\n1+++2+++1001+++3")).toBe(6);
+    });
+  });
 });
