@@ -20,6 +20,6 @@ describe("String calculator TDD", () => {
 
   it("4. should return the sum of numbers separated by comma", () => {
     expect(add("3,6,9")).toBe(18);
-    expect(add("10,15,10,5,10,25,20")).toBe(80);
+    expect(add("10,15,10,5,10,25,20")).toBe(95);
   });
 });
