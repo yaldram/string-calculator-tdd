@@ -21,7 +21,7 @@ describe("String calculator TDD", () => {
     });
 
     it("4. should return the sum of numbers separated by comma", () => {
-      expect(add("3,6,9")).toBe(18);
+      expect(add("3,6.0,9")).toBe(18);
       expect(add("10,15,10,5,10,25,20")).toBe(95);
     });
 
@@ -94,6 +94,10 @@ describe("String calculator TDD", () => {
 
     it("16. should ignore numbers bigger than 1000 with custom delimiters", () => {
       expect(add("//;\n2;1001;3")).toBe(5);
+    });
+
+    it("16.1. should multiply numbers if delimiter is an exclamation", () => {
+      expect(add("//!\n2!1001!3")).toBe(6);
     });
 
     it("17. should handle both valid and invalid numbers", () => {
