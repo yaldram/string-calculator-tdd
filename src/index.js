@@ -1,7 +1,7 @@
 export function add(numbers) {
   if (numbers === "") return 0;
 
-  const { regex, numberString } = extractCustomDelimiter(numbers);
+  const { regex, numberString, operation } = extractCustomDelimiter(numbers);
 
   const numbersList = numberString.split(regex).map(Number);
 
@@ -13,7 +13,18 @@ export function add(numbers) {
     );
   }
 
-  return numbersList.reduce((sum, num) => (num > 1000 ? sum : sum + num), 0);
+  return numbersList.reduce((sum, num) => {
+    if (num > 1000) return sum;
+
+    if (operation === "+") {
+      return sum + num
+    } 
+
+    if (operation === "*") {
+      return sum * num
+    }
+    // else handle other cases
+  }, operation === "*" ? 1 : 0)
 }
 
 // utilities
@@ -22,7 +33,7 @@ export function extractCustomDelimiter(inputString) {
 
   // if there are no delimiters, return the default comma and new line regex
   if (!inputString.startsWith("//")) {
-    return { regex: defaultRegex, numberString: inputString };
+    return { regex: defaultRegex, numberString: inputString, operation: "+" };
   }
 
   // extract the custom delimiter and the number string
@@ -46,7 +57,11 @@ export function extractCustomDelimiter(inputString) {
   const escapedDelimiters = delimiters.map((d) =>
     d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
   );
+  const isDelimiterExclamation = escapedDelimiters.includes("!");
+
   const delimiterRegex = new RegExp(escapedDelimiters.join("|"));
 
-  return { regex: delimiterRegex, numberString };
+  return { regex: delimiterRegex, numberString, operation: isDelimiterExclamation ? "*" : "+" };
 }
+
+
